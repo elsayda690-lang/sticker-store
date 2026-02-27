@@ -6,16 +6,10 @@
     "name": "Frappe Technologies Pvt. Ltd.",
     "email": "hello@frappe.io"
   },
-  "scripts": {
+"scripts": {
     "dev": "node build/scripts/dev.mjs",
-    "build": "node build/scripts/build.mjs",
-    "release": "scripts/publish-mac-arm.sh",
-    "postinstall": "electron-rebuild",
-    "postuninstall": "electron-rebuild",
-    "script:translate": "scripts/runner.sh scripts/generateTranslations.ts",
-    "script:profile": "scripts/profile.sh",
+    "build": "vite build --outDir dist",
     "test": "scripts/test.sh",
-    "uitest": "node uitest/index.mjs | tap-spec",
     "lint": "eslint . --ext ts,vue",
     "format": "prettier --write ."
   },
