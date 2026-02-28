@@ -1,3 +1,9 @@
+/**
+ * Initialize IPC Bridge first (Electron or Mock for browser)
+ * Must be imported before any code that uses `ipc`
+ */
+import { ipc } from './utils/ipcBridge';
+
 import { CUSTOM_EVENTS } from 'utils/messages';
 import { UnexpectedLogObject } from 'utils/types';
 import { App as VueApp, createApp } from 'vue';

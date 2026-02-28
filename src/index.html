@@ -7,24 +7,15 @@
     <title>Frappe Books</title>
 
     <script>
-      window.ipc = {
-        send: (channel, ...args) => console.log(`IPC Send: ${channel}`, args),
-        on: (channel, listener) => console.log(`IPC On: ${channel}`),
-        invoke: async (channel, ...args) => {
-          console.log(`IPC Invoke: ${channel}`, args);
-          // 💡 هنا بنرجع بيانات وهمية بس بتخلي الكود يكمل 💡
-          if (channel === 'get-env') {
-            return { isDevelopment: false, platform: 'web', version: '1.0.0' };
-          }
-          if (channel === 'get-config') {
-            return {};
-          }
-          return null;
-        },
-        removeAllListeners: (channel) => console.log(`IPC RemoveListeners: ${channel}`),
-        getEnv: () => Promise.resolve({ isDevelopment: false, platform: 'web', version: '1.0.0' }),
-        openExternalUrl: (url) => window.open(url, '_blank')
-      };
+      /**
+       * Minimal IPC fallback for browser environments.
+       * The main IPC bridge (src/utils/ipcBridge.ts) will provide the full mock
+       * implementation when the app initializes. This empty object ensures that
+       * code referencing window.ipc early on doesn't crash.
+       */
+      if (!window.ipc) {
+        window.ipc = {};
+      }
     </script>
     
     <script type="module" src="./renderer.ts"></script>
