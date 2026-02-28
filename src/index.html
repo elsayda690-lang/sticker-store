@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Frappe Books</title>
+
+    <script>
+      window.ipc = {
+        send: () => {},
+        on: () => {},
+        invoke: () => Promise.resolve([]),
+        removeAllListeners: () => {}
+      };
+    </script>
+    <script type="module" crossorigin src="/assets/index-3c5VhXVx.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B-jVbyrO.css">
   </head>
   <body></body>
-  <script type="module" src="./renderer.ts"></script>
 </html>
