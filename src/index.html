@@ -5,7 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Frappe Books</title>
+
+    <script>
+      window.ipc = {
+        send: (channel, ...args) => {
+          console.log(`IPC Send: ${channel}`, args);
+          // هنا ممكن تحاكي استجابة الباك إيند لو محتاج
+        },
+        on: (channel, listener) => {
+          console.log(`IPC On: ${channel}`);
+        },
+        invoke: async (channel, ...args) => {
+          console.log(`IPC Invoke: ${channel}`, args);
+          // ⚠️ ده أهم جزء: ارجع بيانات وهمية بناءً على الـ channel ⚠️
+          if (channel === 'get-env') {
+            return { isDevelopment: false, platform: 'web', version: '1.0.0' };
+          }
+          return null;
+        },
+        removeAllListeners: (channel) => {
+          console.log(`IPC RemoveListeners: ${channel}`);
+        },
+        // أضف أي دوال تانية الـ renderer.ts بيستخدمها
+        getEnv: () => Promise.resolve({ isDevelopment: false, platform: 'web', version: '1.0.0' }),
+        openExternalUrl: (url) => window.open(url, '_blank')
+      };
+    </script>
+    
+    <script type="module" src="./renderer.ts"></script>
   </head>
-  <body></body>
-  <script type="module" src="./renderer.ts"></script>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
