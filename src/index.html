@@ -7,26 +7,17 @@
     <title>Frappe Books</title>
 
     <script>
-      window.ipc = {
-        send: (channel, ...args) => {
-          console.log(`IPC Send: ${channel}`, args);
-          // هنا ممكن تحاكي استجابة الباك إيند لو محتاج
-        },
-        on: (channel, listener) => {
-          console.log(`IPC On: ${channel}`);
-        },
+      window.ipc = window.ipc || {
+        send: (channel, ...args) => console.log(`IPC Send: ${channel}`, args),
+        on: (channel, listener) => console.log(`IPC On: ${channel}`),
         invoke: async (channel, ...args) => {
           console.log(`IPC Invoke: ${channel}`, args);
-          // ⚠️ ده أهم جزء: ارجع بيانات وهمية بناءً على الـ channel ⚠️
           if (channel === 'get-env') {
             return { isDevelopment: false, platform: 'web', version: '1.0.0' };
           }
           return null;
         },
-        removeAllListeners: (channel) => {
-          console.log(`IPC RemoveListeners: ${channel}`);
-        },
-        // أضف أي دوال تانية الـ renderer.ts بيستخدمها
+        removeAllListeners: (channel) => console.log(`IPC RemoveListeners: ${channel}`),
         getEnv: () => Promise.resolve({ isDevelopment: false, platform: 'web', version: '1.0.0' }),
         openExternalUrl: (url) => window.open(url, '_blank')
       };
